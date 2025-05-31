@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALEXIOS.PROD - Создаю контент, который работает</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <a href="#" class="logo">ALEXIOS.PROD</a>
+                <button class="header__burger" aria-label="Открыть меню">
+                    <span class="header__burger-line"></span>
+                    <span class="header__burger-line"></span>
+                    <span class="header__burger-line"></span>
+                </button>
+                <nav class="nav">
+                    <ul class="nav__list">
+                        <li><a href="#services">Услуги</a></li>
+                        <li><a href="#producing">Продюсирование</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                        <li><button class="btn btn--outline">Заказать обратный звонок</button></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero__content">
+                    <div class="hero__text">
+                        <h1 class="hero__title">СОЗДАЮ КОНТЕНТ, КОТОРЫЙ <span class="text-orange">РАБОТАЕТ</span></h1>
+                        <p class="hero__subtitle">Создаю контент, который не просто привлекает внимание, а приносит реальные результаты. От стратегии до реализации — каждый проект уникален и направлен на достижение ваших целей.</p>
+                        
+                        <div class="hero__details">
+                            <div class="detail">
+                                <span class="detail__label">Опыт</span>
+                                <span class="detail__value">3+ года</span>
+                            </div>
+                            <div class="detail">
+                                <span class="detail__label">Направления</span>
+                                <span class="detail__value">Монтаж, продюсирование, рилсмейкинг</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero__form">
+                        <div class="form-card">
+                            <h3 class="form-card__title">Запишись на консультацию</h3>
+                            <p class="form-card__subtitle">Обсудим ваш проект и подберем оптимальное решение</p>
+                            <form class="form">
+                                <div class="form__group">
+                                    <input type="text" placeholder="Ваше имя" required>
+                                </div>
+                                <div class="form__group">
+                                    <input type="tel" placeholder="+7 (___) ___-__-__">
+                                    <span class="form__hint">(необязательно)</span>
+                                </div>
+                                <div class="form__group">
+                                    <input type="text" placeholder="Telegram">
+                                </div>
+                                <label class="checkbox">
+                                    <input type="checkbox" required>
+                                    <span>Я соглашаюсь с политикой конфиденциальности</span>
+                                </label>
+                                <button type="submit" class="btn btn--black">Записаться</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services" id="services">
+            <div class="container">
+                <h2 class="section-title">Услуги</h2>
+                <div class="services__grid">
+                    <div class="service-card">
+                        <div class="service-card__video-carousel">
+                            <div class="service-card__video-wrapper">
+                                <video class="video-player" loop muted playsinline>
+                                    <source src="assets/reels-preview.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-overlay">
+                                    <button class="play-button">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 5.14V19.14L19 12.14L8 5.14Z" fill="white"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <button class="sound-button" aria-label="Включить звук">
+                                    <svg class="sound-icon sound-icon--muted" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11 5L6 9H2V15H6L11 19V5Z" fill="white"/>
+                                        <path d="M19.07 4.93C17.43 3.29 15.44 2.25 13.25 2.25C11.06 2.25 9.07 3.29 7.43 4.93L6 3.5C7.93 1.57 10.5 0.25 13.25 0.25C16 0.25 18.57 1.57 20.5 3.5L19.07 4.93Z" fill="white"/>
+                                        <path d="M15.54 8.46C14.85 7.77 13.95 7.25 13 7.25C12.05 7.25 11.15 7.77 10.46 8.46L9 7C10.17 5.83 11.55 5.25 13 5.25C14.45 5.25 15.83 5.83 17 7L15.54 8.46Z" fill="white"/>
+                                    </svg>
+                                    <svg class="sound-icon sound-icon--unmuted" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11 5L6 9H2V15H6L11 19V5Z" fill="white"/>
+                                        <path d="M15.54 8.46C16.48 9.4 17 10.65 17 12C17 13.35 16.48 14.6 15.54 15.54M19.07 4.93C20.94 6.8 22 9.3 22 12C22 14.7 20.94 17.2 19.07 19.07" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="service-card__video-wrapper">
+                                <video class="video-player" loop muted playsinline>
+                                    <source src="assets/reels-preview-2.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-overlay">
+                                    <button class="play-button">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 5.14V19.14L19 12.14L8 5.14Z" fill="white"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <button class="sound-button" aria-label="Включить звук">
+                                    <svg class="sound-icon sound-icon--muted" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11 5L6 9H2V15H6L11 19V5Z" fill="white"/>
+                                        <path d="M19.07 4.93C17.43 3.29 15.44 2.25 13.25 2.25C11.06 2.25 9.07 3.29 7.43 4.93L6 3.5C7.93 1.57 10.5 0.25 13.25 0.25C16 0.25 18.57 1.57 20.5 3.5L19.07 4.93Z" fill="white"/>
+                                        <path d="M15.54 8.46C14.85 7.77 13.95 7.25 13 7.25C12.05 7.25 11.15 7.77 10.46 8.46L9 7C10.17 5.83 11.55 5.25 13 5.25C14.45 5.25 15.83 5.83 17 7L15.54 8.46Z" fill="white"/>
+                                    </svg>
+                                    <svg class="sound-icon sound-icon--unmuted" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11 5L6 9H2V15H6L11 19V5Z" fill="white"/>
+                                        <path d="M15.54 8.46C16.48 9.4 17 10.65 17 12C17 13.35 16.48 14.6 15.54 15.54M19.07 4.93C20.94 6.8 22 9.3 22 12C22 14.7 20.94 17.2 19.07 19.07" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="service-card__video-nav">
+                                <button class="service-card__video-nav-btn service-card__video-nav-btn--prev">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <div class="service-card__video-dots">
+                                    <button class="service-card__video-dot service-card__video-dot--active"></button>
+                                    <button class="service-card__video-dot"></button>
+                                </div>
+                                <button class="service-card__video-nav-btn service-card__video-nav-btn--next">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="service-card__header">
+                            <h3 class="service-card__title">Динамичный монтаж</h3>
+                            <div class="service-card__price">2 500 ₽ / ролик</div>
+                        </div>
+                        <div class="service-card__content">
+                            <ul class="service-card__features">
+                                <li>Быстрый ритм</li>
+                                <li>Красивый визуал</li>
+                                <li>Зацеп с первых секунд</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-card__video-carousel">
+                            <div class="service-card__video-wrapper">
+                                <video class="video-player" loop muted playsinline>
+                                    <source src="assets/advanced-preview.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-overlay">
+                                    <button class="play-button">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 5.14V19.14L19 12.14L8 5.14Z" fill="white"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <button class="sound-button" aria-label="Включить звук">
+                                    <svg class="sound-icon sound-icon--muted" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11 5L6 9H2V15H6L11 19V5Z" fill="white"/>
+                                        <path d="M19.07 4.93C17.43 3.29 15.44 2.25 13.25 2.25C11.06 2.25 9.07 3.29 7.43 4.93L6 3.5C7.93 1.57 10.5 0.25 13.25 0.25C16 0.25 18.57 1.57 20.5 3.5L19.07 4.93Z" fill="white"/>
+                                        <path d="M15.54 8.46C14.85 7.77 13.95 7.25 13 7.25C12.05 7.25 11.15 7.77 10.46 8.46L9 7C10.17 5.83 11.55 5.25 13 5.25C14.45 5.25 15.83 5.83 17 7L15.54 8.46Z" fill="white"/>
+                                    </svg>
+                                    <svg class="sound-icon sound-icon--unmuted" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11 5L6 9H2V15H6L11 19V5Z" fill="white"/>
+                                        <path d="M15.54 8.46C16.48 9.4 17 10.65 17 12C17 13.35 16.48 14.6 15.54 15.54M19.07 4.93C20.94 6.8 22 9.3 22 12C22 14.7 20.94 17.2 19.07 19.07" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="service-card__video-wrapper">
+                                <video class="video-player" loop muted playsinline>
+                                    <source src="assets/advanced-preview-2.mp4" type="video/mp4">
+                                </video>
+                                <div class="video-overlay">
+                                    <button class="play-button">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 5.14V19.14L19 12.14L8 5.14Z" fill="white"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <button class="sound-button" aria-label="Включить звук">
+                                    <svg class="sound-icon sound-icon--muted" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11 5L6 9H2V15H6L11 19V5Z" fill="white"/>
+                                        <path d="M19.07 4.93C17.43 3.29 15.44 2.25 13.25 2.25C11.06 2.25 9.07 3.29 7.43 4.93L6 3.5C7.93 1.57 10.5 0.25 13.25 0.25C16 0.25 18.57 1.57 20.5 3.5L19.07 4.93Z" fill="white"/>
+                                        <path d="M15.54 8.46C14.85 7.77 13.95 7.25 13 7.25C12.05 7.25 11.15 7.77 10.46 8.46L9 7C10.17 5.83 11.55 5.25 13 5.25C14.45 5.25 15.83 5.83 17 7L15.54 8.46Z" fill="white"/>
+                                    </svg>
+                                    <svg class="sound-icon sound-icon--unmuted" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11 5L6 9H2V15H6L11 19V5Z" fill="white"/>
+                                        <path d="M15.54 8.46C16.48 9.4 17 10.65 17 12C17 13.35 16.48 14.6 15.54 15.54M19.07 4.93C20.94 6.8 22 9.3 22 12C22 14.7 20.94 17.2 19.07 19.07" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="service-card__video-nav">
+                                <button class="service-card__video-nav-btn service-card__video-nav-btn--prev">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <div class="service-card__video-dots">
+                                    <button class="service-card__video-dot service-card__video-dot--active"></button>
+                                    <button class="service-card__video-dot"></button>
+                                </div>
+                                <button class="service-card__video-nav-btn service-card__video-nav-btn--next">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="service-card__header">
+                            <h3 class="service-card__title">Продвинутый монтаж</h3>
+                            <div class="service-card__price">3 500 ₽ / ролик</div>
+                        </div>
+                        <div class="service-card__content">
+                            <p class="service-card__description"></p>
+                            <ul class="service-card__features">
+                                <li>Профессиональный монтаж</li>
+                                <li>Сложная графика</li>
+                                <li>Сторителлинг</li>
+                                <li>Эффектные переходы и звук</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="more-works">
+            <div class="container">
+                <div class="more-works__content">
+                    <a href="https://t.me/aleksiosprod" target="_blank" class="more-works__link">
+                        Больше кейсов тут
+                        <svg class="more-works__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.49 10.38 15.84 14.22 15.51 15.99C15.37 16.74 15.09 16.99 14.83 17.02C14.25 17.07 13.81 16.64 13.25 16.27C12.37 15.69 11.87 15.33 11.02 14.77C10.03 14.12 10.67 13.76 11.24 13.18C11.39 13.03 13.95 10.7 14 10.49C14.0069 10.4582 14.006 10.4252 13.9973 10.3938C13.9886 10.3624 13.9724 10.3337 13.95 10.31C13.89 10.26 13.81 10.27 13.74 10.28C13.65 10.28 11.99 11.32 8.78 13.39C8.2 13.72 7.67 13.88 7.17 13.87C6.63 13.86 5.58 13.64 4.74 13.45C3.73 13.22 2.89 13.05 2.96 12.52C3 12.25 3.3 11.98 3.89 11.71C7.14 10.12 9.41 8.91 10.69 8.09C13.85 6.27 14.55 6.02 15.09 6.02C15.19 6.02 15.43 6.05 15.58 6.17C15.71 6.27 15.73 6.4 15.74 6.5C15.73 6.6 15.74 6.84 15.64 6.8Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="discount-packages">
+            <div class="container">
+                <h2 class="discount-packages__title">Скидка при заказе <span class="text-orange">REELS</span> пакетом</h2>
+                <p class="discount-packages__subtitle">Чем больше роликов — тем выгоднее.</p>
+                <div class="discount-packages__grid">
+                    <div class="discount-package">
+                        <span class="discount-package__icon">📦</span>
+                        <h3 class="discount-package__title">30 рилс</h3>
+                        <p class="discount-package__count">30 коротких видео</p>
+                        <div class="discount-package__discount">5%</div>
+                    </div>
+                    <div class="discount-package">
+                        <span class="discount-package__icon">📦</span>
+                        <h3 class="discount-package__title">60 рилс</h3>
+                        <p class="discount-package__count">60 коротких видео</p>
+                        <div class="discount-package__discount">10%</div>
+                    </div>
+                    <div class="discount-package">
+                        <span class="discount-package__icon">📦</span>
+                        <h3 class="discount-package__title">90+ рилс</h3>
+                        <p class="discount-package__count">90+ коротких видео</p>
+                        <div class="discount-package__discount">15%</div>
+                    </div>
+                    <div class="discount-package">
+                        <span class="discount-package__icon">🧪</span>
+                        <h3 class="discount-package__title">Пробный ролик</h3>
+                        <p class="discount-package__count">1 короткое видео</p>
+                        <div class="discount-package__discount">50%</div>
+                        <p class="discount-package__description">Чтобы вы не «пробовали наугад» — а сразу увидели результат</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="complex-offer">
+            <div class="container">
+                <h2 class="complex-offer__title">Рилсмейкинг</h2>
+                <div class="complex-offer__grid">
+                    <div class="complex-package">
+                        <div class="complex-package__header">
+                            <div class="complex-package__icon">🎬</div>
+                            <h3 class="complex-package__title">Динамичный монтаж + сценарий</h3>
+                        </div>
+                        <div class="complex-package__price">3 000 ₽ / ролик</div>
+                        <ul class="complex-package__features">
+                            <li class="complex-package__feature">Динамичный монтаж</li>
+                            <li class="complex-package__feature">Профессиональный сценарий</li>
+                            <li class="complex-package__feature">Цветокоррекция</li>
+                            <li class="complex-package__feature">Базовая графика</li>
+                        </ul>
+                        <div class="complex-package__marketing">
+                            <h4 class="complex-package__marketing-title">Маркетинговая поддержка</h4>
+                            <ul class="complex-package__marketing-features">
+                                <li class="complex-package__marketing-feature">Помощь с построением воронки</li>
+                                <li class="complex-package__marketing-feature">Актуальное</li>
+                                <li class="complex-package__marketing-feature">Лид-магниты</li>
+                                <li class="complex-package__marketing-feature">Telegram-канал</li>
+                                <li class="complex-package__marketing-feature">Ссылка в шапке профиля</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="complex-package">
+                        <div class="complex-package__header">
+                            <div class="complex-package__icon">🎥</div>
+                            <h3 class="complex-package__title">Продвинутый монтаж + сценарий</h3>
+                        </div>
+                        <div class="complex-package__price">4 500 ₽ / ролик</div>
+                        <ul class="complex-package__features">
+                            <li class="complex-package__feature">Продвинутый монтаж</li>
+                            <li class="complex-package__feature">Профессиональный сценарий</li>
+                            <li class="complex-package__feature">Сложная цветокоррекция</li>
+                            <li class="complex-package__feature">Продвинутая графика и анимация</li>
+                        </ul>
+                        <div class="complex-package__marketing">
+                            <h4 class="complex-package__marketing-title">Расширенная маркетинговая поддержка</h4>
+                            <ul class="complex-package__marketing-features">
+                                <li class="complex-package__marketing-feature">Помощь с построением воронки</li>
+                                <li class="complex-package__marketing-feature">Актуальное</li>
+                                <li class="complex-package__marketing-feature">Лид-магниты</li>
+                                <li class="complex-package__marketing-feature">Telegram-канал</li>
+                                <li class="complex-package__marketing-feature">Ссылка в шапке профиля</li>
+                                <li class="complex-package__marketing-feature">Стратегия продвижения</li>
+                                <li class="complex-package__marketing-feature">Аналитика и отчеты</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="producing" id="producing">
+            <div class="container">
+                <h2 class="producing__title">Продюсирование Reels</h2>
+                <div class="producing__content">
+                    <div class="producing__features">
+                        <div class="producing__feature">
+                            <span class="producing__feature-icon">🔍</span>
+                            <h3 class="producing__feature-title">Анализ конкурентов и трендов</h3>
+                            <p class="producing__feature-description">Глубокий анализ конкурентов и актуальных трендов для создания контента, который выделит вас среди других</p>
+                        </div>
+                        <div class="producing__feature">
+                            <span class="producing__feature-icon">🎯</span>
+                            <h3 class="producing__feature-title">Анализ целевой аудитории</h3>
+                            <p class="producing__feature-description">Исследование и сегментация целевой аудитории для создания максимально релевантного контента</p>
+                        </div>
+                        <div class="producing__feature">
+                            <span class="producing__feature-icon">🧪</span>
+                            <h3 class="producing__feature-title">Разработка идеи и концепции</h3>
+                            <p class="producing__feature-description">Создание уникальной идеи и концепции ролика, которая зацепит вашу аудиторию</p>
+                        </div>
+                        <div class="producing__feature">
+                            <span class="producing__feature-icon">📜</span>
+                            <h3 class="producing__feature-title">Готовый сценарий</h3>
+                            <p class="producing__feature-description">Детальный пошаговый сценарий с описанием каждого кадра для идеальной реализации</p>
+                        </div>
+                        <div class="producing__feature">
+                            <span class="producing__feature-icon">🧪</span>
+                            <h3 class="producing__feature-title">Техническое задание</h3>
+                            <p class="producing__feature-description">Подробные рекомендации по съёмке и технические требования для получения качественного материала</p>
+                        </div>
+                        <div class="producing__feature">
+                            <span class="producing__feature-icon">📊</span>
+                            <h3 class="producing__feature-title">Анализ эффективности</h3>
+                            <p class="producing__feature-description">Глубокий анализ метрик и показателей для оптимизации контент-стратегии и повышения вовлеченности</p>
+                        </div>
+                    </div>
+                    <div class="producing__price">Стоимость: по договорённости</div>
+                    <button class="producing__button">Обсудить проект</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="additional-services">
+            <h2 class="additional-services__title">Дополнительные услуги</h2>
+            <div class="additional-services__grid">
+                <div class="additional-service">
+                    <span class="additional-service__icon">🧪</span>
+                    <h3 class="additional-service__title">Создание AI-аватара</h3>
+                    <p class="additional-service__description">Используем современные нейросети: Heygen и Elevenlabs для создания реалистичных цифровых аватаров</p>
+                </div>
+                <div class="additional-service">
+                    <span class="additional-service__icon">🎥</span>
+                    <h3 class="additional-service__title">Инструкция по съёмке</h3>
+                    <p class="additional-service__description">Полная инструкция по съёмке и записи голоса для создания качественного контента</p>
+                </div>
+                <div class="additional-service">
+                    <span class="additional-service__icon">🎯</span>
+                    <h3 class="additional-service__title">Реалистичный результат</h3>
+                    <p class="additional-service__description">Достигаем результата, который практически неотличим от живого человека</p>
+                </div>
+                <div class="additional-service">
+                    <span class="additional-service__icon">🎬</span>
+                    <h3 class="additional-service__title">Монтаж роликов</h3>
+                    <p class="additional-service__description">Профессиональный монтаж горизонтальных роликов с учетом всех современных трендов</p>
+                </div>
+                <div class="additional-service">
+                    <span class="additional-service__icon">🎨</span>
+                    <h3 class="additional-service__title">2D motion-дизайн</h3>
+                    <p class="additional-service__description">Создание динамичной анимации и визуальных эффектов для вашего контента</p>
+                </div>
+                <div class="additional-service">
+                    <span class="additional-service__icon">🌀</span>
+                    <h3 class="additional-service__title">AI-видео</h3>
+                    <p class="additional-service__description">Генерация уникального видео-контента с помощью передовых нейросетей</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contacts" id="contacts">
+            <div class="container">
+                <div class="contacts__content">
+                    <h2 class="contacts__title">Готовы обсудить проект?</h2>
+                    <p class="contacts__subtitle">Свяжитесь с нами удобным способом или оставьте заявку, и мы поможем вам создать контент, который действительно работает</p>
+                    
+                    <div class="contacts__grid">
+                        <div class="contact-card">
+                            <span class="contact-card__icon">📱</span>
+                            <h3 class="contact-card__title">Telegram</h3>
+                            <a href="https://t.me/alexiosprod" class="contact-card__link">@alexiosprod</a>
+                            <p class="contact-card__description">Быстрый ответ в любое время</p>
+                        </div>
+                    </div>
+
+                    <div class="contacts__form">
+                        <div class="form-card">
+                            <h3 class="form-card__title">Оставить заявку</h3>
+                            <p class="form-card__subtitle">Заполните форму, и мы свяжемся с вами в ближайшее время</p>
+                            <form class="form">
+                                <div class="form__group">
+                                    <div class="input-wrapper">
+                                        <input type="text" id="name" required>
+                                        <label for="name" class="floating-label">Ваше имя</label>
+                                        <div class="input-focus-border"></div>
+                                    </div>
+                                </div>
+                                <div class="form__group">
+                                    <div class="input-wrapper">
+                                        <input type="tel" id="phone">
+                                        <label for="phone" class="floating-label">Телефон (необязательно)</label>
+                                        <div class="input-focus-border"></div>
+                                    </div>
+                                </div>
+                                <div class="form__group">
+                                    <div class="input-wrapper">
+                                        <input type="text" id="telegram">
+                                        <label for="telegram" class="floating-label">Telegram</label>
+                                        <div class="input-focus-border"></div>
+                                    </div>
+                                </div>
+                                <div class="form__group form__group--full">
+                                    <div class="input-wrapper">
+                                        <textarea id="message" required></textarea>
+                                        <label for="message" class="floating-label">Опишите ваш проект</label>
+                                        <div class="input-focus-border"></div>
+                                    </div>
+                                </div>
+                                <div class="form__group form__group--full">
+                                    <div class="checkbox-wrapper">
+                                        <input type="checkbox" id="privacy" required>
+                                        <label for="privacy" class="checkbox-label">
+                                            <span class="checkbox-custom"></span>
+                                            <span class="checkbox-text">Я согласен с политикой конфиденциальности</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn--black">
+                                    <span class="btn-text">Отправить</span>
+                                    <span class="btn-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="modal" id="callbackModal">
+        <div class="modal__content">
+            <button class="modal__close">&times;</button>
+            <h3 class="modal__title">Заказать обратный звонок</h3>
+            <p class="modal__subtitle">Оставьте свои контактные данные, и мы свяжемся с вами в ближайшее время</p>
+            <form class="modal__form">
+                <input type="text" placeholder="Ваше имя" required>
+                <input type="tel" placeholder="+7 (___) ___-__-__">
+                <input type="text" placeholder="Telegram">
+                <button type="submit" class="modal__submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="packageModal">
+        <div class="modal__content">
+            <button class="modal__close">&times;</button>
+            <h3 class="modal__title">Заказать пакет</h3>
+            <p class="modal__subtitle">Оставьте свои контактные данные, и мы свяжемся с вами для обсуждения деталей</p>
+            <form class="modal__form">
+                <input type="text" placeholder="Ваше имя" required>
+                <input type="tel" placeholder="+7 (___) ___-__-__">
+                <input type="email" placeholder="Email" required>
+                <input type="text" placeholder="Telegram">
+                <textarea placeholder="Комментарий к заказу"></textarea>
+                <button type="submit" class="modal__submit">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__main">
+                    <div class="footer__contacts">
+                        <a href="https://t.me/alexiosprod" class="footer__contact-link" target="_blank">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.24-.02-.1.02-1.79 1.14-5.06 3.35-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.86-.44-.75-.24-1.35-.37-1.3-.78.03-.25.37-.51 1.02-.78 3.92-1.72 6.54-2.85 7.87-3.38 3.77-1.58 4.55-1.85 5.06-1.86.11 0 .36.03.52.18.14.14.18.33.2.52-.01.17.01.51.01.51z"/>
+                            </svg>
+                            @alexiosprod
+                        </a>
+                        <a href="https://t.me/alexiosmp4" class="footer__contact-link" target="_blank">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.24-.02-.1.02-1.79 1.14-5.06 3.35-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.86-.44-.75-.24-1.35-.37-1.3-.78.03-.25.37-.51 1.02-.78 3.92-1.72 6.54-2.85 7.87-3.38 3.77-1.58 4.55-1.85 5.06-1.86.11 0 .36.03.52.18.14.14.18.33.2.52-.01.17.01.51.01.51z"/>
+                            </svg>
+                            Мой телеграм канал
+                        </a>
+                        <a href="https://www.youtube.com/@Alexiosproduction" class="footer__contact-link" target="_blank">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                            </svg>
+                            Мой YouTube канал
+                        </a>
+                    </div>
+                    <div class="footer__info">
+                        <p class="footer__copyright">© 2025 ALEXIOS.PROD.<br> Все права защищены.</p>
+                        <p class="footer__development">Разработано <a href="https://t.me/wawaw" class="footer__development-link" target="_blank">Mishlen</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
