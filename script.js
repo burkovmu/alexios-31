@@ -376,6 +376,28 @@ document.addEventListener('DOMContentLoaded', function() {
     async function initVideos() {
         const videos = document.querySelectorAll('.video-player');
         
+        // Создаем IntersectionObserver для отслеживания видимости видео
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+                if (entry.isIntersecting) {
+                    // Видео видимо, пытаемся воспроизвести
+                    if (video.paused) {
+                        video.play().catch(error => {
+                            console.log('Автовоспроизведение не удалось:', error);
+                        });
+                    }
+                } else {
+                    // Видео не видимо, останавливаем
+                    if (!video.paused) {
+                        video.pause();
+                    }
+                }
+            });
+        }, {
+            threshold: 0.5 // Видео должно быть видно на 50%
+        });
+        
         for (const video of videos) {
             try {
                 // Устанавливаем атрибуты для надежного воспроизведения
@@ -388,12 +410,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 video.addEventListener('loadeddata', async () => {
-                    try {
-                        await video.play();
-                        console.log('Видео успешно воспроизведено');
-                    } catch (error) {
-                        console.log('Автовоспроизведение не удалось:', error);
-                    }
+                    // Добавляем видео в observer
+                    observer.observe(video);
                 });
 
                 // Загружаем видео через blob URL
@@ -433,15 +451,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Запускаем текущее видео
                 const currentVideo = wrappers[index].querySelector('video');
                 if (currentVideo) {
-                    // Загружаем видео через blob URL
-                    const blobUrl = await loadVideoAsBlob(currentVideo);
-                    if (blobUrl) {
-                        try {
-                            await currentVideo.play();
-                            console.log('Видео в карусели успешно воспроизведено');
-                        } catch (error) {
-                            console.log('Автовоспроизведение не удалось:', error);
-                        }
+                    try {
+                        // Загружаем видео через blob URL
+                        await loadVideoAsBlob(currentVideo);
+                        // Даем небольшую задержку перед воспроизведением
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                        await currentVideo.play();
+                        console.log('Видео в карусели успешно воспроизведено');
+                    } catch (error) {
+                        console.log('Автовоспроизведение не удалось:', error);
                     }
                 }
                 
