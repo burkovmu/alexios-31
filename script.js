@@ -328,6 +328,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Инициализация видео
+    function initVideos() {
+        const videos = document.querySelectorAll('.video-player');
+        
+        videos.forEach(video => {
+            // Принудительно загружаем видео
+            video.load();
+            
+            // Пытаемся воспроизвести видео
+            const playPromise = video.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log('Автовоспроизведение не удалось:', error);
+                });
+            }
+        });
+    }
+
+    // Вызываем инициализацию видео
+    initVideos();
+
     // Инициализация карусели видео
     function initVideoCarousels() {
         const carousels = document.querySelectorAll('.service-card__video-carousel');
@@ -345,6 +367,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 wrappers[index].style.display = 'block';
                 dots[index].classList.add('service-card__video-dot--active');
+                
+                // Останавливаем все видео
+                wrappers.forEach(wrapper => {
+                    const video = wrapper.querySelector('video');
+                    if (video) {
+                        video.pause();
+                    }
+                });
+                
+                // Запускаем текущее видео
+                const currentVideo = wrappers[index].querySelector('video');
+                if (currentVideo) {
+                    currentVideo.load();
+                    const playPromise = currentVideo.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.log('Автовоспроизведение не удалось:', error);
+                        });
+                    }
+                }
+                
                 currentIndex = index;
             }
 
@@ -354,15 +397,22 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // Обработчики для кнопок навигации
-            prevBtn.addEventListener('click', () => {
-                const newIndex = currentIndex === 0 ? wrappers.length - 1 : currentIndex - 1;
-                showSlide(newIndex);
-            });
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    const newIndex = (currentIndex - 1 + wrappers.length) % wrappers.length;
+                    showSlide(newIndex);
+                });
+            }
+            
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    const newIndex = (currentIndex + 1) % wrappers.length;
+                    showSlide(newIndex);
+                });
+            }
 
-            nextBtn.addEventListener('click', () => {
-                const newIndex = currentIndex === wrappers.length - 1 ? 0 : currentIndex + 1;
-                showSlide(newIndex);
-            });
+            // Инициализация первого слайда
+            showSlide(0);
         });
     }
 
