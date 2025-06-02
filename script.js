@@ -377,8 +377,31 @@ document.addEventListener('DOMContentLoaded', function() {
         return new Promise((resolve, reject) => {
             let playAttempts = 0;
             const maxAttempts = 3;
+            let isPlaying = false;
 
-            function attemptPlay() {
+            // Функция для проверки состояния видео
+            function checkVideoState() {
+                return new Promise((resolve) => {
+                    if (video.readyState >= 2 && !video.paused && !video.ended) {
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
+                });
+            }
+
+            // Функция для ожидания загрузки видео
+            function waitForVideoLoad() {
+                return new Promise((resolve) => {
+                    if (video.readyState >= 2) {
+                        resolve();
+                    } else {
+                        video.addEventListener('loadeddata', () => resolve(), { once: true });
+                    }
+                });
+            }
+
+            async function attemptPlay() {
                 if (playAttempts >= maxAttempts) {
                     reject(new Error('Превышено максимальное количество попыток воспроизведения'));
                     return;
@@ -386,26 +409,47 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 playAttempts++;
                 
-                // Проверяем готовность видео
-                if (video.readyState >= 2) {
-                    video.play()
-                        .then(() => {
-                            console.log('Видео успешно воспроизведено');
-                            resolve();
-                        })
-                        .catch(error => {
-                            console.log(`Попытка ${playAttempts} не удалась:`, error);
-                            // Пробуем еще раз через небольшую задержку
-                            setTimeout(attemptPlay, 500);
-                        });
-                } else {
-                    // Если видео еще не готово, ждем события loadeddata
-                    video.addEventListener('loadeddata', attemptPlay, { once: true });
+                try {
+                    // Ждем загрузки видео
+                    await waitForVideoLoad();
+
+                    // Проверяем, не воспроизводится ли уже видео
+                    if (await checkVideoState()) {
+                        resolve();
+                        return;
+                    }
+
+                    // Пытаемся воспроизвести
+                    await video.play();
+                    
+                    // Проверяем, что видео действительно воспроизводится
+                    const isPlaying = await checkVideoState();
+                    if (isPlaying) {
+                        console.log('Видео успешно воспроизведено');
+                        resolve();
+                    } else {
+                        throw new Error('Видео не воспроизводится после play()');
+                    }
+                } catch (error) {
+                    console.log(`Попытка ${playAttempts} не удалась:`, error);
+                    
+                    // Если это не последняя попытка, пробуем еще раз
+                    if (playAttempts < maxAttempts) {
+                        // Сбрасываем состояние видео
+                        video.pause();
+                        video.currentTime = 0;
+                        
+                        // Ждем немного перед следующей попыткой
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        attemptPlay();
+                    } else {
+                        reject(error);
+                    }
                 }
             }
 
             // Начинаем попытки воспроизведения
-            requestAnimationFrame(attemptPlay);
+            attemptPlay();
         });
     }
 
@@ -428,6 +472,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Видео не видимо, останавливаем
                     if (!video.paused) {
                         video.pause();
+                        video.currentTime = 0;
                     }
                 }
             });
