@@ -372,6 +372,43 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Функция для безопасного воспроизведения видео
+    async function safePlayVideo(video) {
+        return new Promise((resolve, reject) => {
+            let playAttempts = 0;
+            const maxAttempts = 3;
+
+            function attemptPlay() {
+                if (playAttempts >= maxAttempts) {
+                    reject(new Error('Превышено максимальное количество попыток воспроизведения'));
+                    return;
+                }
+
+                playAttempts++;
+                
+                // Проверяем готовность видео
+                if (video.readyState >= 2) {
+                    video.play()
+                        .then(() => {
+                            console.log('Видео успешно воспроизведено');
+                            resolve();
+                        })
+                        .catch(error => {
+                            console.log(`Попытка ${playAttempts} не удалась:`, error);
+                            // Пробуем еще раз через небольшую задержку
+                            setTimeout(attemptPlay, 500);
+                        });
+                } else {
+                    // Если видео еще не готово, ждем события loadeddata
+                    video.addEventListener('loadeddata', attemptPlay, { once: true });
+                }
+            }
+
+            // Начинаем попытки воспроизведения
+            requestAnimationFrame(attemptPlay);
+        });
+    }
+
     // Инициализация видео
     async function initVideos() {
         const videos = document.querySelectorAll('.video-player');
@@ -383,8 +420,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (entry.isIntersecting) {
                     // Видео видимо, пытаемся воспроизвести
                     if (video.paused) {
-                        video.play().catch(error => {
-                            console.log('Автовоспроизведение не удалось:', error);
+                        safePlayVideo(video).catch(error => {
+                            console.log('Не удалось воспроизвести видео:', error);
                         });
                     }
                 } else {
@@ -395,7 +432,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }, {
-            threshold: 0.5 // Видео должно быть видно на 50%
+            threshold: 0.5,
+            rootMargin: '50px'
         });
         
         for (const video of videos) {
@@ -403,14 +441,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Устанавливаем атрибуты для надежного воспроизведения
                 video.muted = true;
                 video.playsInline = true;
+                video.preload = 'auto';
                 
                 // Добавляем обработчики событий
                 video.addEventListener('error', (e) => {
                     console.error('Ошибка воспроизведения видео:', e);
                 });
 
-                video.addEventListener('loadeddata', async () => {
-                    // Добавляем видео в observer
+                video.addEventListener('loadeddata', () => {
                     observer.observe(video);
                 });
 
@@ -454,12 +492,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     try {
                         // Загружаем видео через blob URL
                         await loadVideoAsBlob(currentVideo);
-                        // Даем небольшую задержку перед воспроизведением
-                        await new Promise(resolve => setTimeout(resolve, 100));
-                        await currentVideo.play();
-                        console.log('Видео в карусели успешно воспроизведено');
+                        // Пытаемся воспроизвести видео
+                        await safePlayVideo(currentVideo);
                     } catch (error) {
-                        console.log('Автовоспроизведение не удалось:', error);
+                        console.log('Не удалось воспроизвести видео в карусели:', error);
                     }
                 }
                 
