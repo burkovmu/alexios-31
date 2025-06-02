@@ -333,73 +333,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const videos = document.querySelectorAll('.video-player');
         
         videos.forEach(video => {
-            // Проверяем доступность видео
-            const source = video.querySelector('source');
-            if (source) {
-                const videoUrl = source.src;
-                
-                // Проверяем доступность видеофайла
-                fetch(videoUrl, { method: 'HEAD' })
-                    .then(response => {
-                        if (!response.ok) {
-                            console.error(`Видео недоступно: ${videoUrl}`);
-                            return;
-                        }
-                        
-                        // Устанавливаем атрибуты для надежного воспроизведения
-                        video.setAttribute('playsinline', '');
-                        video.setAttribute('webkit-playsinline', '');
-                        video.muted = true;
-                        
-                        // Принудительно загружаем видео
-                        video.load();
-                        
-                        // Пытаемся воспроизвести видео
-                        const playVideo = async () => {
-                            try {
-                                // Проверяем готовность видео
-                                if (video.readyState >= 2) {
-                                    await video.play();
-                                    console.log('Видео успешно воспроизведено:', videoUrl);
-                                } else {
-                                    // Если видео еще не загружено, ждем загрузки
-                                    video.addEventListener('canplay', async () => {
-                                        try {
-                                            await video.play();
-                                            console.log('Видео воспроизведено после загрузки:', videoUrl);
-                                        } catch (error) {
-                                            console.error('Ошибка воспроизведения после загрузки:', error);
-                                        }
-                                    }, { once: true });
-                                }
-                            } catch (error) {
-                                console.error('Ошибка воспроизведения:', error);
-                                
-                                // Пробуем воспроизвести после взаимодействия пользователя
-                                const playAfterInteraction = () => {
-                                    video.play()
-                                        .then(() => console.log('Видео воспроизведено после взаимодействия:', videoUrl))
-                                        .catch(e => console.error('Повторная попытка воспроизведения не удалась:', e));
-                                };
-                                
-                                // Добавляем обработчики для разных событий взаимодействия
-                                ['click', 'touchstart', 'keydown'].forEach(event => {
-                                    document.addEventListener(event, playAfterInteraction, { once: true });
-                                });
-                            }
-                        };
-                        
-                        playVideo();
-                    })
-                    .catch(error => {
-                        console.error('Ошибка при проверке доступности видео:', error);
-                    });
-            }
+            // Устанавливаем атрибуты для надежного воспроизведения
+            video.muted = true;
+            
+            // Принудительно загружаем видео
+            video.load();
+            
+            // Пытаемся воспроизвести видео
+            video.play().catch(error => {
+                console.log('Автовоспроизведение не удалось:', error);
+            });
         });
     }
-
-    // Вызываем инициализацию видео
-    initVideos();
 
     // Инициализация карусели видео
     function initVideoCarousels() {
@@ -412,7 +357,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const nextBtn = carousel.querySelector('.service-card__video-nav-btn--next');
             let currentIndex = 0;
 
-            async function showSlide(index) {
+            function showSlide(index) {
                 wrappers.forEach(wrapper => wrapper.style.display = 'none');
                 dots.forEach(dot => dot.classList.remove('service-card__video-dot--active'));
                 
@@ -430,37 +375,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Запускаем текущее видео
                 const currentVideo = wrappers[index].querySelector('video');
                 if (currentVideo) {
-                    try {
-                        // Проверяем готовность видео
-                        if (currentVideo.readyState >= 2) {
-                            await currentVideo.play();
-                            console.log('Видео в карусели успешно воспроизведено');
-                        } else {
-                            // Если видео еще не загружено, ждем загрузки
-                            currentVideo.addEventListener('canplay', async () => {
-                                try {
-                                    await currentVideo.play();
-                                    console.log('Видео в карусели воспроизведено после загрузки');
-                                } catch (error) {
-                                    console.error('Ошибка воспроизведения после загрузки:', error);
-                                }
-                            }, { once: true });
-                        }
-                    } catch (error) {
-                        console.error('Ошибка воспроизведения видео в карусели:', error);
-                        
-                        // Пробуем воспроизвести после взаимодействия пользователя
-                        const playAfterInteraction = () => {
-                            currentVideo.play()
-                                .then(() => console.log('Видео в карусели воспроизведено после взаимодействия'))
-                                .catch(e => console.error('Повторная попытка воспроизведения не удалась:', e));
-                        };
-                        
-                        // Добавляем обработчики для разных событий взаимодействия
-                        ['click', 'touchstart', 'keydown'].forEach(event => {
-                            document.addEventListener(event, playAfterInteraction, { once: true });
-                        });
-                    }
+                    currentVideo.load();
+                    currentVideo.play().catch(error => {
+                        console.log('Автовоспроизведение не удалось:', error);
+                    });
                 }
                 
                 currentIndex = index;
