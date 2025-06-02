@@ -334,7 +334,21 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!source) return;
 
         try {
-            const response = await fetch(source.src);
+            // Проверяем, является ли URL уже blob URL
+            if (source.src.startsWith('blob:')) {
+                return source.src;
+            }
+
+            const response = await fetch(source.src, {
+                method: 'GET',
+                mode: 'cors',
+                credentials: 'same-origin'
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
             const blob = await response.blob();
             const blobUrl = URL.createObjectURL(blob);
             
@@ -348,12 +362,13 @@ document.addEventListener('DOMContentLoaded', function() {
             videoElement.appendChild(newSource);
             
             // Загружаем видео
-            videoElement.load();
+            await videoElement.load();
             
             return blobUrl;
         } catch (error) {
             console.error('Ошибка при загрузке видео:', error);
-            return null;
+            // В случае ошибки возвращаем оригинальный URL
+            return source.src;
         }
     }
 
@@ -362,19 +377,29 @@ document.addEventListener('DOMContentLoaded', function() {
         const videos = document.querySelectorAll('.video-player');
         
         for (const video of videos) {
-            // Устанавливаем атрибуты для надежного воспроизведения
-            video.muted = true;
-            
-            // Загружаем видео через blob URL
-            const blobUrl = await loadVideoAsBlob(video);
-            if (blobUrl) {
-                // Пытаемся воспроизвести видео
-                try {
-                    await video.play();
-                    console.log('Видео успешно воспроизведено');
-                } catch (error) {
-                    console.log('Автовоспроизведение не удалось:', error);
-                }
+            try {
+                // Устанавливаем атрибуты для надежного воспроизведения
+                video.muted = true;
+                video.playsInline = true;
+                
+                // Добавляем обработчики событий
+                video.addEventListener('error', (e) => {
+                    console.error('Ошибка воспроизведения видео:', e);
+                });
+
+                video.addEventListener('loadeddata', async () => {
+                    try {
+                        await video.play();
+                        console.log('Видео успешно воспроизведено');
+                    } catch (error) {
+                        console.log('Автовоспроизведение не удалось:', error);
+                    }
+                });
+
+                // Загружаем видео через blob URL
+                await loadVideoAsBlob(video);
+            } catch (error) {
+                console.error('Ошибка при инициализации видео:', error);
             }
         }
     }
