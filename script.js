@@ -328,36 +328,69 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Функция для загрузки видео через blob URL
+    async function loadVideoAsBlob(videoElement) {
+        const source = videoElement.querySelector('source');
+        if (!source) return;
+
+        try {
+            const response = await fetch(source.src);
+            const blob = await response.blob();
+            const blobUrl = URL.createObjectURL(blob);
+            
+            // Создаем новый source элемент
+            const newSource = document.createElement('source');
+            newSource.src = blobUrl;
+            newSource.type = 'video/mp4';
+            
+            // Заменяем старый source
+            videoElement.removeChild(source);
+            videoElement.appendChild(newSource);
+            
+            // Загружаем видео
+            videoElement.load();
+            
+            return blobUrl;
+        } catch (error) {
+            console.error('Ошибка при загрузке видео:', error);
+            return null;
+        }
+    }
+
     // Инициализация видео
-    function initVideos() {
+    async function initVideos() {
         const videos = document.querySelectorAll('.video-player');
         
-        videos.forEach(video => {
+        for (const video of videos) {
             // Устанавливаем атрибуты для надежного воспроизведения
             video.muted = true;
             
-            // Принудительно загружаем видео
-            video.load();
-            
-            // Пытаемся воспроизвести видео
-            video.play().catch(error => {
-                console.log('Автовоспроизведение не удалось:', error);
-            });
-        });
+            // Загружаем видео через blob URL
+            const blobUrl = await loadVideoAsBlob(video);
+            if (blobUrl) {
+                // Пытаемся воспроизвести видео
+                try {
+                    await video.play();
+                    console.log('Видео успешно воспроизведено');
+                } catch (error) {
+                    console.log('Автовоспроизведение не удалось:', error);
+                }
+            }
+        }
     }
 
     // Инициализация карусели видео
-    function initVideoCarousels() {
+    async function initVideoCarousels() {
         const carousels = document.querySelectorAll('.service-card__video-carousel');
         
-        carousels.forEach(carousel => {
+        for (const carousel of carousels) {
             const wrappers = carousel.querySelectorAll('.service-card__video-wrapper');
             const dots = carousel.querySelectorAll('.service-card__video-dot');
             const prevBtn = carousel.querySelector('.service-card__video-nav-btn--prev');
             const nextBtn = carousel.querySelector('.service-card__video-nav-btn--next');
             let currentIndex = 0;
 
-            function showSlide(index) {
+            async function showSlide(index) {
                 wrappers.forEach(wrapper => wrapper.style.display = 'none');
                 dots.forEach(dot => dot.classList.remove('service-card__video-dot--active'));
                 
@@ -375,10 +408,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Запускаем текущее видео
                 const currentVideo = wrappers[index].querySelector('video');
                 if (currentVideo) {
-                    currentVideo.load();
-                    currentVideo.play().catch(error => {
-                        console.log('Автовоспроизведение не удалось:', error);
-                    });
+                    // Загружаем видео через blob URL
+                    const blobUrl = await loadVideoAsBlob(currentVideo);
+                    if (blobUrl) {
+                        try {
+                            await currentVideo.play();
+                            console.log('Видео в карусели успешно воспроизведено');
+                        } catch (error) {
+                            console.log('Автовоспроизведение не удалось:', error);
+                        }
+                    }
                 }
                 
                 currentIndex = index;
@@ -405,12 +444,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Инициализация первого слайда
-            showSlide(0);
-        });
+            await showSlide(0);
+        }
     }
 
-    // Инициализация при загрузке страницы
-    initVideoCarousels();
+    // Вызываем инициализацию при загрузке страницы
+    document.addEventListener('DOMContentLoaded', async () => {
+        await initVideos();
+        await initVideoCarousels();
+    });
 
     // Автоматическое воспроизведение видео
     const videoWrappers = document.querySelectorAll('.service-card__video-wrapper');
