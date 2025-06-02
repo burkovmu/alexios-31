@@ -333,17 +333,29 @@ document.addEventListener('DOMContentLoaded', function() {
         const videos = document.querySelectorAll('.video-player');
         
         videos.forEach(video => {
+            // Устанавливаем атрибуты для надежного воспроизведения
+            video.setAttribute('playsinline', '');
+            video.setAttribute('webkit-playsinline', '');
+            video.muted = true;
+            
             // Принудительно загружаем видео
             video.load();
             
-            // Пытаемся воспроизвести видео
-            const playPromise = video.play();
+            // Пытаемся воспроизвести видео с обработкой ошибок
+            const playVideo = async () => {
+                try {
+                    await video.play();
+                    console.log('Видео успешно воспроизведено');
+                } catch (error) {
+                    console.log('Ошибка воспроизведения:', error);
+                    // Пробуем воспроизвести снова после взаимодействия пользователя
+                    document.addEventListener('click', () => {
+                        video.play().catch(e => console.log('Повторная попытка воспроизведения не удалась:', e));
+                    }, { once: true });
+                }
+            };
             
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.log('Автовоспроизведение не удалось:', error);
-                });
-            }
+            playVideo();
         });
     }
 
@@ -361,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const nextBtn = carousel.querySelector('.service-card__video-nav-btn--next');
             let currentIndex = 0;
 
-            function showSlide(index) {
+            async function showSlide(index) {
                 wrappers.forEach(wrapper => wrapper.style.display = 'none');
                 dots.forEach(dot => dot.classList.remove('service-card__video-dot--active'));
                 
@@ -379,12 +391,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Запускаем текущее видео
                 const currentVideo = wrappers[index].querySelector('video');
                 if (currentVideo) {
-                    currentVideo.load();
-                    const playPromise = currentVideo.play();
-                    if (playPromise !== undefined) {
-                        playPromise.catch(error => {
-                            console.log('Автовоспроизведение не удалось:', error);
-                        });
+                    try {
+                        currentVideo.load();
+                        await currentVideo.play();
+                        console.log('Видео в карусели успешно воспроизведено');
+                    } catch (error) {
+                        console.log('Ошибка воспроизведения видео в карусели:', error);
+                        // Пробуем воспроизвести после взаимодействия пользователя
+                        document.addEventListener('click', () => {
+                            currentVideo.play().catch(e => console.log('Повторная попытка воспроизведения не удалась:', e));
+                        }, { once: true });
                     }
                 }
                 
